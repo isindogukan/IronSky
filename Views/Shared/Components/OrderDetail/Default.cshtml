@@ -1,0 +1,24 @@
+﻿@model BasketModel
+<table class="table table-summary">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.BasketProducts)
+        {
+            <tr>
+                <td><a href="#">@item.Product.Name <strong class="product-quantity">x @item.Quantity</strong></a></td>
+                <td>@Html.Raw(item.Product.Price * item.Quantity)</td>
+            </tr>
+        }
+        <tr class="summary-subtotal">
+            <td>Subtotal:</td>
+            <td>@Html.Raw(Model.BasketProducts.Sum(x=>x.Product.Price * x.Quantity).ToString("C"))</td>
+        </tr><!-- End .summary-subtotal -->
+        
+    </tbody>
+</table><!-- End .table table-summary -->

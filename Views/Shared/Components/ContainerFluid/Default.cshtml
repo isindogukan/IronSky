@@ -1,0 +1,215 @@
+﻿@using IronSky.ViewComponents.Models;
+@model ContainerFluidModel
+
+<div class="container">
+    <ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="products-featured-link" data-toggle="tab" href="#products-featured-tab" role="tab" aria-controls="products-featured-tab" aria-selected="true">New Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="products-sale-link" data-toggle="tab" href="#products-sale-tab" role="tab" aria-controls="products-sale-tab" aria-selected="false">Most Populer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="products-top-link" data-toggle="tab" href="#products-top-tab" role="tab" aria-controls="products-top-tab" aria-selected="false">Last View</a>
+        </li>
+    </ul>
+</div><!-- End .container -->
+
+<div class="container-fluid">
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel" aria-labelledby="products-featured-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":5
+                                    },
+                                    "1600": {
+                                        "items":6,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in Model.NewProducts)
+                {
+                <div class="product product-11 text-center">
+                    <figure class="product-media">
+                        <a href="/urun/@item.SeoName">
+                            <img src="~/images/demos/demo-2/products/@item.Image" alt="Product image" class="product-image">
+
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist"><span>add to wishlist</span></a>
+                        </div><!-- End .product-action-vertical -->
+                    </figure><!-- End .product-media -->
+               
+                    <div class="product-body">
+                        <h3 class="product-title"><a href="/urun/@item.SeoName">@item.Name</a></h3><!-- End .product-title -->
+                        <div class="product-price">
+                            @item.Price.ToString()
+                        </div><!-- End .product-price -->
+                    </div><!-- End .product-body -->
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart" onclick="AddBasket(1,@item.Id)"><span>add to cart</span></a>
+                        @*<a href="#">Cart - <span class="cart-amunt">0</span> <i class="fa fa-shopping-cart"  onclick="AddBasket(1,@item.Id)"></i> <span class="product-count">0</span></a>*@
+
+                        <a href="/urun/@item.SeoName" class="btn-product btn-cart"><span>See Details</span></a>
+                    </div><!-- End .product-action -->
+
+                </div><!-- End .product -->
+                }
+
+
+
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+        <div class="tab-pane p-0 fade" id="products-sale-tab" role="tabpanel" aria-labelledby="products-sale-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":5
+                                    },
+                                    "1600": {
+                                        "items":6,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in Model.MostPopular)
+                {
+                  
+                <div class="product product-11 text-center">
+                    <figure class="product-media">
+                        <a href="/urun/@item.SeoName">
+                            <img src="/images/demos/demo-2/products/@item.Image" alt="Product image" class="product-image">
+                            <img src="/images/demos/demo-2/products/product-5-2.jpg" alt="Product image" class="product-image-hover">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist"><span>add to wishlist</span></a>
+                        </div><!-- End .product-action-vertical -->
+
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <h3 class="product-title"><a href="/urun/@item.SeoName">@item.Name</a></h3><!-- End .product-title -->
+                        <div class="product-price">
+                            @item.Price
+                        </div><!-- End .product-price -->
+
+                        <div class="product-nav product-nav-dots">
+                            <a href="#" class="active" style="background: #74543e;"><span class="sr-only">Color name</span></a>
+                            <a href="#" style="background: #e8e8e8;"><span class="sr-only">Color name</span></a>
+                        </div><!-- End .product-nav -->
+                    </div><!-- End .product-body -->
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart" onclick="AddBasket(1,@item.Id)"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                    
+                </div><!-- End .product -->}
+
+
+
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+        <div class="tab-pane p-0 fade" id="products-top-tab" role="tabpanel" aria-labelledby="products-top-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                 data-owl-options='{
+                                "nav": false,
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":5
+                                    },
+                                    "1600": {
+                                        "items":6,
+                                        "nav": true
+                                    }
+                                }
+                            }'>
+                @foreach (var item in Model.LastView)
+                {
+                <div class="product product-11 text-center">
+                    <figure class="product-media">
+                        <a href="/urun/@item.SeoName">
+                            <img src="/images/demos/demo-2/products/@item.Image" alt="Product image" class="product-image">
+                            <img src="/images/demos/demo-2/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon btn-wishlist"><span>add to wishlist</span></a>
+                        </div><!-- End .product-action-vertical -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <h3 class="product-title"><a href="/urun/@item.SeoName">@item.Name</a></h3><!-- End .product-title -->
+                        <div class="product-price">
+                            @item.Price
+                        </div><!-- End .product-price -->
+
+                        <div class="product-nav product-nav-dots">
+                            <a href="#" class="active" style="background: #1f1e18;"><span class="sr-only">Color name</span></a>
+                            <a href="#" style="background: #e8e8e8;"><span class="sr-only">Color name</span></a>
+                        </div><!-- End .product-nav -->
+                    </div><!-- End .product-body -->
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart" onclick="AddBasket(1,@item.Id)"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                   
+                </div><!-- End .product -->
+                }
+
+
+
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+    </div><!-- End .tab-content -->
+</div><!-- End .container-fluid -->
